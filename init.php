@@ -14,8 +14,8 @@
 	define( 'ABSPATH', __DIR__ . '/' );
  endif;
 
- /** Require the main config file */
- require_once ABSPATH . 'config/config.php';
-
  /** Require autoload.php */
  require_once 'vendor/autoload.php';
+
+ /** Require the main config file */
+ require_once ABSPATH . 'config/config.php';
