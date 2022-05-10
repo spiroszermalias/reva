@@ -7,3 +7,5 @@
  * @package reva
  * @author Spiros Zermalias <me@spiroszermalias.com>
  */
+
+ require_once '../init.php';
