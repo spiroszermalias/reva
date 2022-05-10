@@ -1,0 +1,13 @@
+{
+    "name": "spiros/reva",
+    "description": "ReVa is the go-to project to manage your organization employee-vacation|",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Spiros Zermalias",
+            "email": "me@spiroszermalias.com"
+        }
+    ],
+    "require": {}
+}
