@@ -9,6 +9,11 @@
             "email": "me@spiroszermalias.com"
         }
     ],
+    "autoload" : {
+        "psr-4" : {
+            "Core\\" : "app/class/core"
+        }
+    },
     "require": {
         "bramus/router": "~1.6",
         "sergeytsalkov/meekrodb": "*"
