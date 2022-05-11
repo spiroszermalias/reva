@@ -11,13 +11,13 @@ ini_set('display_errors', DISPLAY_ERRORS);
 
 // ** MySQL credentials ** //
 /** The name of the database*/
-define( 'DB_NAME', '' );
+define( 'DB_NAME', 'hO93_reva' );
 
 /** MySQL database username */
-define( 'DB_USER', '' );
+define( 'DB_USER', 'admin_66Id' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'T17f!G77bHOofb' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );

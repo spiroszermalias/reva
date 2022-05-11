@@ -27,7 +27,7 @@ define( 'TIME_FORMAT', 'H:i:s' );
 define( 'DATETIME_FORMAT', 'Y-m-d H:i:s' );
 
 /** Enable or disable error display */
-define('DISPLAY_ERRORS', '0');
+define('DISPLAY_ERRORS', '1');
 
 /** Enable or disable error logging */
 ini_set('log_errors', 'On');
