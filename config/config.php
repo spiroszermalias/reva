@@ -25,6 +25,7 @@ define('APP_URL', filter_var( $_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL ) );
 define( 'DATE_FORMAT', 'd-m-Y' );
 define( 'TIME_FORMAT', 'H:i:s' );
 define( 'DATETIME_FORMAT', 'Y-m-d H:i:s' );
+define( TIMEZONE, 'Europe/Athens' );
 
 /** Enable or disable error display */
 define('DISPLAY_ERRORS', '1');
