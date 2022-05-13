@@ -60,3 +60,32 @@ function now( $format = 'datetime' ) {
     
     return ($format === 'timestamp')? $timestamp : $datetime;
 }
+
+function logged_in() {
+    $instance = new Core\Session_Validate;
+    return $instance->logged_in();
+}
+
+function render( string $template = '' ) {
+    if ( $template == '' ) return '';
+    
+    $template_no_slashes = str_replace('/', '', $template);
+    
+    $template_clean = str_replace('.php', '', $template_no_slashes); 
+    if ( $template_clean == null ) return '';
+
+    ob_start();
+    include dirname(__DIR__, 1) . "/views/{$template_clean}.php";
+    $output = ob_get_contents();
+    ob_end_clean();
+
+    echo $output;
+}
+
+function head() {
+    include dirname(__DIR__, 1) . "/views/global/head.php";
+}
+
+function footer() {
+    include dirname(__DIR__, 1) . "/views/global/footer.php";
+}
