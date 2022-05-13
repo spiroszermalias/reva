@@ -9,7 +9,7 @@
                     <div class="w-100">
                         <div class="d-flex flex-column h-100">
                             <div class="mb-4 mb-md-5 text-center">
-                                <a href="index.html" class="d-block auth-logo">
+                                <a href="/" class="d-block auth-logo">
                                     <img src="assets/images/logo.png" alt="" width="150">
                                 </a>
                             </div>
