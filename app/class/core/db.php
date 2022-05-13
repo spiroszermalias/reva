@@ -13,7 +13,7 @@ namespace Core;
 class Db
 {
     /** Hold the class instance. */
-    private static $instance = null;
+    private static $instance = NULL;
 
     /**
      * $tables contains the required tables.
@@ -21,16 +21,23 @@ class Db
      */
     private static $tables = array(
         'users' =>
-        '`user_id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-        `user_name` VARCHAR( 255 ) NOT NULL ,
+        '`user_id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `username` VARCHAR( 255 ) NOT NULL ,
         `user_email` VARCHAR( 60 ) NOT NULL ,
         `user_pass` VARCHAR( 255 ) NOT NULL ,
          UNIQUE (`user_name`),
          UNIQUE (`user_email`)'
         ,
+        'token_auth' => "
+        `id` int(11) NOT NULL PRIMARY KEY,
+        `username` varchar(255) NOT NULL,
+        `password_hash` varchar(255) NOT NULL,
+        `selector_hash` varchar(255) NOT NULL,
+        `is_expired` int(11) NOT NULL DEFAULT '0',
+        `expiry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        ,
     );
 
- 
     private function __construct() {
         $this->check_db();
     }

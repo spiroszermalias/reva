@@ -50,3 +50,7 @@ DB::$password = DB_PASSWORD;
 DB::$host = DB_HOST;
 DB::$port = DB_PORT;
 DB::$encoding = DB_CHARSET;
+
+/** Define tables */
+define( 'USERS_TBL', 'users' );
+define( 'TOKENS_TBL', 'token_auth' );

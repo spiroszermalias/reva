@@ -11,8 +11,12 @@
     ],
     "autoload" : {
         "psr-4" : {
-            "Core\\" : "app/class/core"
-        }
+            "Core\\" : "app/Class/Core/",
+            "Controller\\" : "app/Controller/"
+        },
+        "files" : [
+            "app/functions/helpers.php"
+        ]
     },
     "require": {
         "bramus/router": "~1.6",
