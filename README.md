@@ -1,3 +1,2 @@
-# reva
-
-Documentation here
+# ReVa (Request Vacations)
+Hello and welcome!
