@@ -11,8 +11,9 @@
     ],
     "autoload" : {
         "psr-4" : {
-            "Core\\" : "app/Class/Core/",
-            "Controller\\" : "app/Controller/"
+            "Core\\" : "app/Core/",
+            "Controller\\" : "app/Controller/",
+            "Model\\" : "app/Model/"
         },
         "files" : [
             "app/functions/helpers.php"

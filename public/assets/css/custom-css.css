@@ -1,0 +1,60 @@
+    /* === Pagination === */
+.pagin {
+    display: inline-block;
+}
+
+.pagin > i {
+    cursor: pointer;
+    font-size: 1.3rem;
+    vertical-align: middle;
+}
+
+.pagin > i:hover {
+    color: var(--bs-blue);
+}
+
+.pagin > span {
+    vertical-align: middle;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.7rem;
+    font-weight: bold;
+    display: inline-block;
+    width: 2rem; height: 2rem;
+    text-align: center;
+}
+
+.pagin > span.active {
+    background-color: var(--bs-blue);
+    font-weight: bold;
+    color: #fff;
+}
+
+.pagin > span:hover {
+    background-color: var(--bs-blue);
+    color: #fff;
+}
+/* === /Pagination === */
+
+/* === Tables === */
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    background: var(--bs-blue);
+}
+
+.clickable:hover td {
+    color: #fff;
+}
+/* === /Tables === */
+
+/* === Btns === */
+.btn {
+    background-color: var(--bs-blue);
+    color: #fff;
+    font-weight: 700;
+}
+/* === /Btns === */

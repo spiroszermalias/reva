@@ -3,17 +3,17 @@
 namespace Core;
 
 class Auth {
-    public function get_user_by_username($username) {
+    public function get_user_by_user_email($user_email) {
         $table = USERS_TBL;
-        $query = "Select * from {$table} where username = %s";
-        $result = \DB::queryFirstRow($query, $username);
+        $query = "Select * from {$table} where user_email = %s";
+        $result = \DB::queryFirstRow($query, $user_email);
         return $result;
     }
     
-	protected function get_token_by_username($username, $expired) {
+	protected function get_token_by_email($user_email, $expired) {
 	    $table = TOKENS_TBL;
-        $query = "Select * from {$table} where username = %s and is_expired = %i";
-	    $result = \DB::queryFirstRow($query, $username, $expired);
+        $query = "Select * from {$table} where user_email = %s and is_expired = %i";
+	    $result = \DB::queryFirstRow($query, $user_email, $expired);
 	    return $result;
     }
     
@@ -25,10 +25,10 @@ class Auth {
         return $result;
     }
     
-    protected function insert_token($username, $random_password_hash, $random_selector_hash, $expiry_date) {
+    protected function insert_token($user_email, $random_password_hash, $random_selector_hash, $expiry_date) {
         $table = TOKENS_TBL;
-        $query = "INSERT INTO {$table} (username, password_hash, selector_hash, expiry_date) values (%s, %s, %s,%s)";
-        $result = \DB::query($query, $username, $random_password_hash, $random_selector_hash, $expiry_date);
+        $query = "INSERT INTO {$table} (user_email, password_hash, selector_hash, expiry_date) values (%s, %s, %s,%s)";
+        $result = \DB::query($query, $user_email, $random_password_hash, $random_selector_hash, $expiry_date);
         return $result;
     }
 
@@ -37,9 +37,11 @@ class Auth {
     }
 
     public function clear_auth_cookie() {
+        session_start();
         //Clear Session
         $_SESSION["user_id"] = '';
         session_destroy();
+        session_write_close();
         
         /** Clear cookies */
         $cookies = $_COOKIE;
@@ -48,10 +50,10 @@ class Auth {
         }
     }
     
-    public function set_auth_cookie( $username  ) {
+    public function set_auth_cookie( $user_email  ) {
         // Set Cookie expiration for 1 month
         $cookie_expiration_time = now('timestamp') + (30 * 24 * 60 * 60);
-        setcookie('user_login', $username, $cookie_expiration_time);
+        setcookie('user_login', $user_email, $cookie_expiration_time);
 
         $random_password = $this->get_token(16);
         setcookie('random_password', $random_password, $cookie_expiration_time);
@@ -65,13 +67,13 @@ class Auth {
         $expiry_date = date(DATETIME_FORMAT, $cookie_expiration_time);
 
         /** Mark existing token as expired */
-        $user_token = $this->get_token_by_username($username, 0);
+        $user_token = $this->get_token_by_email($user_email, 0);
         if ( !empty($user_token['id']) ) :
             $this->mark_as_expired( $user_token['id'] );
         endif;
         
         /** Insert new token */
-        $this->insert_token($username, $random_password_hash, $random_selector_hash, $expiry_date);
+        $this->insert_token($user_email, $random_password_hash, $random_selector_hash, $expiry_date);
     }
 
 //end class
