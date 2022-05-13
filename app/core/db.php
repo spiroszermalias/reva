@@ -23,7 +23,10 @@ class Db
         'users' =>
         '`user_id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         `username` VARCHAR( 255 ) NOT NULL ,
+        `first_name` tinytext COLLATE,
+        `last_name` tinytext COLLATE,
         `user_email` VARCHAR( 60 ) NOT NULL ,
+        `role` tinytext COLLATE,
         `user_pass` VARCHAR( 255 ) NOT NULL ,
          UNIQUE (`user_name`),
          UNIQUE (`user_email`)'

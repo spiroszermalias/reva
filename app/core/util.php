@@ -9,4 +9,6 @@ class Util
             header("Location: {$redirect_to}");
             exit;
     }
+
+//end class
 }

@@ -35,8 +35,8 @@ class Session_Validate extends Auth
             $isSelectorVerified = false;
             $isExpiryDateVerified = false;
 
-            /** Get token for username */
-            $user_token = $this->get_token_by_username($user_login_coo, 0);
+            /** Get token for email */
+            $user_token = $this->get_token_by_email($user_login_coo, 0);
 
             if ( empty($user_token) ) return false;
 

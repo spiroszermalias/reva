@@ -13,19 +13,17 @@ class Login
         
         if ( $is_authenticated ) :
             
-            $username = $_POST['username'];
+            $user_email = $_POST['user_email'];
             $password = $_POST['user_psw'];
 
-            $user = $this->auth->get_user_by_username($username);
+            $user = $this->auth->get_user_by_user_email($user_email);
 
+            session_start();
             $_SESSION['user_id'] = $user['user_id'];
+            session_write_close();
 
-            /** Set Auth Cookies if 'Remember Me' checked */
-            if ( isset($_POST['remember']) ) :
-                $this->auth->set_auth_cookie( $username );
-            else :
-                $this->auth->clear_auth_cookie();
-            endif;
+            /** Set Auth Cookies */
+            $this->auth->set_auth_cookie( $user_email );
         else :
             return false;
         endif;
@@ -33,12 +31,12 @@ class Login
 
     private function is_authenticated() {
         $isAuthenticated = false;
-        $username = isset( $_POST['username'] )? $_POST['username'] : '';
+        $user_email = isset( $_POST['user_email'] )? $_POST['user_email'] : '';
         $password = isset( $_POST['user_psw'] )? $_POST['user_psw'] : '' ;
-        if ( !empty($username) && !empty($password) ) :
+        if ( !empty($user_email) && !empty($password) ) :
             
             //Verify password match    
-            $user = $this->auth->get_user_by_username($username);
+            $user = $this->auth->get_user_by_user_email($user_email);
 
             if ( empty($user['user_pass']) )
                 return false;

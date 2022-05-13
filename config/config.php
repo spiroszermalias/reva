@@ -27,6 +27,9 @@ define( 'TIME_FORMAT', 'H:i:s' );
 define( 'DATETIME_FORMAT', 'Y-m-d H:i:s' );
 define( 'TIMEZONE', 'Europe/Athens' );
 
+/** Define the from email from which the respective email header will be set */
+define( 'GLOBAL_MAIL_FROM', 'user@example.com' );
+
 /** Enable or disable error display */
 define('DISPLAY_ERRORS', '1');
 
@@ -54,3 +57,4 @@ DB::$encoding = DB_CHARSET;
 /** Define tables */
 define( 'USERS_TBL', 'users' );
 define( 'TOKENS_TBL', 'token_auth' );
+define( 'APPL_TBL', 'applications' );
