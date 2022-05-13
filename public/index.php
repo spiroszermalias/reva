@@ -8,4 +8,8 @@
  * @author Spiros Zermalias <me@spiroszermalias.com>
  */
 
+ session_start();
+ 
  require_once '../init.php';
+ 
+ new Controller\MainController;
