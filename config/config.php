@@ -31,10 +31,10 @@ define( 'TIMEZONE', 'Europe/Athens' );
 define( 'GLOBAL_MAIL_FROM', 'user@example.com' );
 
 /** Enable or disable error display */
-define('DISPLAY_ERRORS', '1');
+define('DISPLAY_ERRORS', '0');
 
 /** Enable or disable error logging */
-ini_set('log_errors', 'On');
+ini_set('log_errors', 'Off');
 
 /** Specify the log file path. Preferably, keep log file in a non-public dir */
 ini_set('error_log', ABSPATH . '/error-log.log');
