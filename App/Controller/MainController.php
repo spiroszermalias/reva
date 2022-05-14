@@ -216,6 +216,10 @@ class MainController extends \Model\User
             render('approve-reject', array('msg'=>'Your rejected the vacation request 😥'));
         });
 
+        $this->router->get('/logout', function() {
+            render('logout');
+        });
+
     }
 
 //end class
