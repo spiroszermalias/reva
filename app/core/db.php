@@ -39,6 +39,14 @@ class Db
         `is_expired` int(11) NOT NULL DEFAULT '0',
         `expiry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
         ,
+        'applications' => "
+        `id` int(11) NOT NULL,
+        `user_id` int(11) NOT NULL,
+        `submit_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `from_datetime` datetime NOT NULL,
+        `to_datetime` datetime NOT NULL,
+        `reason` text COLLATE utf8mb4_unicode_ci NOT NULL,
+        `status` tinytext COLLATE utf8mb4_unicode_ci NOT NULL"
     );
 
     private function __construct() {
