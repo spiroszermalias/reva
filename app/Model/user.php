@@ -47,6 +47,25 @@ class User
         return $data;
     }
 
+    /**
+     * check_init_setup, returns whether or not the app is at its fresh install.
+     * Very useful to perform actions like registering the first admin user
+     *
+     * @return boolean: true if app fresh install, false otherwise
+     */
+    public function check_init_setup() {
+        $table = USERS_TBL;
+        $query = "
+            SELECT COUNT(*)
+            FROM {$table}
+            WHERE 1=1";
+        $total_users = \DB::queryFirstField($query);
+        if ( $total_users === '0') {
+            return true;
+        }
+        return false;
+    }
+
     protected function create_user() {
         $first_name = filter_input(INPUT_POST, 'firstname-input', FILTER_SANITIZE_STRING);
         $last_name = filter_input(INPUT_POST, 'lastname-input', FILTER_SANITIZE_STRING);

@@ -66,7 +66,7 @@ class Session_Validate extends Auth
                     $this->mark_as_expired($user_token['id']);
                 endif;
                 /** Clear cookies */
-                $this->clear_auth_cookie();
+                //$this->clear_auth_cookie();
             endif;
 
         endif;

@@ -20,8 +20,35 @@ class MainController extends \Model\User
 
     private function routes() {
         $this->router->before('GET|POST', '/[^\/login].*', function() {
-            if ( !logged_in() ) :
+            if ( !logged_in() && $_SERVER['REQUEST_URI'] != '/setup' ) :
                 $this->util->redirect( '/login' );
+            endif;
+        });
+
+        $this->router->get( '/setup', function() {
+            $fresh_install = $this->check_init_setup();
+            if ( $fresh_install ) :
+                render('first-user');
+            else:
+                $this->util->redirect( '/' );
+            endif;
+        });
+
+        $this->router->post( '/setup', function() {
+            $fresh_install = $this->check_init_setup();
+            if ( $fresh_install ) :
+                $message = '';
+                if ( isset($_POST['user-create']) ) :
+                    $user_ins = new \Model\User;
+                    $status = $user_ins->create_user();
+                    if ( gettype($status)==='string' ) : //There's an error message
+                        $message = $status;
+                    elseif($status) :
+                        $this->util->redirect( '/users' );
+                    endif;
+                endif;
+            else:
+                $this->util->redirect( '/' );
             endif;
         });
 
@@ -127,7 +154,6 @@ class MainController extends \Model\User
         $this->router->post('/users/create', function() {
             $user_ins = new \Model\User;
             
-
             if ( !is_admin() ) : 
                 $this->util->redirect( '/dashboard' );
             endif;

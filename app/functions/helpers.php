@@ -73,6 +73,9 @@ function is_admin() {
         $user = $instance->get_user_by_user_email( $_COOKIE['user_login'] );
         $is_admin = ( $user['role'] === 'admin' )? true : false ;
     endif;
+    $ins = new \Model\User;
+    $fresh_install = $ins->check_init_setup();
+    if ( $fresh_install ) return true;
     return $is_admin;
 }
 
