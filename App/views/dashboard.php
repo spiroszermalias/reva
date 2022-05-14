@@ -15,11 +15,14 @@
                     </a>
                 </div>
                 <?php $user = get_user_info() ?>
-                <span class="text-light">Welcome back <?=$user['first_name']?>!</span>
+                <div>
+                    <span class="text-light">Welcome back <?=$user['first_name']?>!</span>
+                    <a class="btn btn-light mx-3" href="/logout">Logout</a>
+                </div>
             </div>
         </div>
     </header>
-
+    
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
