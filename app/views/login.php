@@ -20,8 +20,8 @@
                                 </div>
                                 <form class="mt-4 pt-2" action="/login" method="post">
                                     <div class="form-floating form-floating-custom mb-4">
-                                        <input type="text" class="form-control" name="username" id="input-username" placeholder="Enter Username">
-                                        <label for="input-username">Username</label>
+                                        <input type="text" class="form-control" name="user_email" id="user_email" placeholder="Enter Email">
+                                        <label for="user_email">Email</label>
                                         <div class="form-floating-icon">
                                             <i data-feather="users"></i>
                                         </div>
@@ -29,20 +29,16 @@
 
                                     <div class="form-floating form-floating-custom mb-4 auth-pass-inputgroup">
                                         <input type="password" class="form-control pe-5" name="user_psw" id="password-input" placeholder="Enter Password">
-                                        
-                                        <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-addon">
-                                            <i class="mdi mdi-eye-outline font-size-18 text-muted"></i>
-                                        </button>
                                         <label for="input-password">Password</label>
                                         <div class="form-floating-icon">
                                             <i data-feather="lock"></i>
                                         </div>
                                     </div>
 
-                                    <div class="row mb-4">
+                                    <div class="row mb-4 d-none">
                                         <div class="col">
                                             <div class="form-check font-size-15">
-                                                <input class="form-check-input" name="remember" type="checkbox" id="remember-check">
+                                                <input class="form-check-input" name="remember" checked type="checkbox" id="remember-check">
                                                 <label class="form-check-label font-size-13" for="remember-check">
                                                     Remember me
                                                 </label>
