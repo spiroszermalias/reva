@@ -19,12 +19,14 @@ class Db
      */
     private static $tables = array(
         'users' =>"
-            `user_id` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
             `first_name` tinytext COLLATE utf8mb4_unicode_ci,
             `last_name` tinytext COLLATE utf8mb4_unicode_ci,
             `role` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
-            `user_pass` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            `user_pass` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+            UNIQUE (`user_email`),
+            INDEX (`user_email`)
         ",
         'token_auth' => "
             `id` int(11) NOT NULL PRIMARY KEY,
