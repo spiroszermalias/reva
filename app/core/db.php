@@ -30,7 +30,7 @@ class Db
         ",
         'token_auth' => "
             `id` int(11) NOT NULL PRIMARY KEY,
-            `username` varchar(255) NOT NULL,
+            `user_email` varchar(255) NOT NULL,
             `password_hash` varchar(255) NOT NULL,
             `selector_hash` varchar(255) NOT NULL,
             `is_expired` int(11) NOT NULL DEFAULT '0',
