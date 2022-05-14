@@ -1,6 +1,6 @@
 /vendor/
 *.log
-.vscode
+/.vscode
 
 # Thumbnail cache files
 Thumbs.db
