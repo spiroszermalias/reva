@@ -11,6 +11,7 @@ class MainController extends \Model\User
     private $appl = NULL;
 
     public function __construct() {
+        new \Core\Db;
         $this->router = new Router();
         $this->util = new \Core\Util();
         $this->appl = new \Model\Application;
