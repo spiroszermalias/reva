@@ -58,3 +58,10 @@
     font-weight: 700;
 }
 /* === /Btns === */
+
+/* === Tables === */
+th {
+    font-weight: 900!important;
+    color: #555;
+}
+/* === /Tables === */
