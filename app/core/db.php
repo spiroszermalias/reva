@@ -29,7 +29,7 @@ class Db
             INDEX (`user_email`)
         ",
         'token_auth' => "
-            `id` int(11) NOT NULL PRIMARY KEY,
+            `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_email` varchar(255) NOT NULL,
             `password_hash` varchar(255) NOT NULL,
             `selector_hash` varchar(255) NOT NULL,
@@ -37,13 +37,14 @@ class Db
             `expiry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         ",
         'applications' => "
-            `id` int(11) NOT NULL,
+            `id` int(11) NOT NULL AUTO_INCREMENT,
             `user_id` int(11) NOT NULL,
             `submit_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `from_datetime` datetime NOT NULL,
             `to_datetime` datetime NOT NULL,
             `reason` text COLLATE utf8mb4_unicode_ci NOT NULL,
-            `status` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
+            `status` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
+            INDEX ('user_id')
         "
     );
 
