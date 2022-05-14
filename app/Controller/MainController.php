@@ -43,7 +43,7 @@ class MainController extends \Model\User
                     $user_ins = new \Model\User;
                     $status = $user_ins->create_user();
                     if ( gettype($status)==='string' ) : //There's an error message
-                        $message = $status;
+                        exit("{$status} Please go back and retry.");
                     elseif($status) :
                         $this->util->redirect( '/users' );
                     endif;
