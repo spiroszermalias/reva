@@ -178,7 +178,7 @@ function isValid($date, $format = DATETIME_FORMAT){
     $reject_link = '<a href="'. $reject_href .'" >Reject</a>' ;
     
     foreach ( $admin_emails as $email ) :
-        $to = $email;
+        $to = $email['user_email'];
         $from = GLOBAL_MAIL_FROM;
         $subject = "New request";
         
