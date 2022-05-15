@@ -2,7 +2,7 @@
 ReVa (Request Vacation) is the go-to project to manage employee requests for vacations!
 
 ## How ReVa may help you
-ReVa streamlines the vacation request and approval proccess through simplicity and automation.
+ReVa streamlines the vacation request and approval process through simplicity and automation.
 It exposes a dashboard for the users to submit their requests and you only have to click on the "approve" or "reject" link
 that will automatically be sent to you after the user's submission. The user will be notified immediately of your decision.
 
@@ -24,7 +24,7 @@ add the first admin user. Voila!
 You might also want to set some of the options found in config/config.php - for example the Timezone or even
 the "from" email address (GLOBAL_MAIL_FROM constant).
 
-*These two files are identical and are meant to be used in case you need to seperate
+*These two files are identical and are meant to be used in case you need to separate
 development from production-specific configuration constants. The config that gets loaded
 is controlled by the master config.php located in the same dir, by setting `APP_MODE`.
 
@@ -61,7 +61,7 @@ As an 'employee' user:
 * Watch your request history, info and state
 
 ## Mumbo jumbo
-For the more tech savvy out there, you may be instrested in the following technical notes to keep in mind
+For the more tech savvy out there, you may be interested in the following technical notes to keep in mind
 in case you need to extend or tweak the codebase. For more, access the documentation [here](https://www.spiroszermalias.com/reva_docs/).
 
 ###### Project structure
