@@ -77,6 +77,11 @@ class Application extends \Model\User
             //Also return $reason and repopulate the form with it
             return array('msg'=>'Invalid date(s) provided', 'reason'=>$reason);
         endif;
+        $start_obj = new \DateTime($start);
+        $end_obj    = new \DateTime($end);
+        if ( $end_obj < $start_obj ) :
+            return array( 'msg'=>'End date must be later than start date', 'reason'=>$reason);
+        endif;
         
         $new_appl_id = $this->insert_application($reason, $start, $end);
         if ($new_appl_id != false) :
