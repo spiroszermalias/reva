@@ -1,6 +1,7 @@
 /vendor/
 *.log
 /.vscode
+/config/
 
 # Thumbnail cache files
 Thumbs.db
