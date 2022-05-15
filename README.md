@@ -62,6 +62,7 @@ in case you need to extend or tweak the codebase.
 
 ###### Project structure
 Most of the code that you may need to deal with is in the /App directory. Directory tree:
+```
 ├───App
 │   ├───Controller
 │   ├───core
@@ -69,6 +70,7 @@ Most of the code that you may need to deal with is in the /App directory. Direct
 │   ├───Model
 │   └───views
 │       └───global
+```
 
 ###### Security and user sessions
 Loging in by default sets the session lifetime to a month.
