@@ -18,7 +18,8 @@
                                     <h5 class="mb-0">Welcome Back !</h5>
                                     <p class="text-muted mt-2">Sign in to continue to ReVa.</p>
                                 </div>
-                                <form class="mt-4 pt-2" action="/login" method="post">
+                                <?php  $maybe_redirect = filter_input(INPUT_GET, 'redirect', FILTER_SANITIZE_URL ); ?>
+                                <form class="mt-4 pt-2" action="/login<?=(!empty($maybe_redirect) && $maybe_redirect != '')? "?redirect={$maybe_redirect}" : ''?>" method="post">
                                     <div class="form-floating form-floating-custom mb-4">
                                         <input type="text" class="form-control" name="user_email" id="user_email" placeholder="Enter Email">
                                         <label for="user_email">Email</label>

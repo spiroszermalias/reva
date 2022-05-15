@@ -21,8 +21,10 @@ class MainController extends \Model\User
 
     private function routes() {
         $this->router->before('GET|POST', '/[^\/login].*', function() {
-            if ( !logged_in() && $_SERVER['REQUEST_URI'] != '/setup' ) :
-                $this->util->redirect( '/login' );
+            $request_uri = filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL );
+            $full_url = APP_URL_WITH_PROTOCOL.$request_uri;
+            if ( !logged_in() && $request_uri != '/setup' ) :
+                $this->util->redirect( "/login?redirect={$full_url}" );
             endif;
         });
 
@@ -89,7 +91,11 @@ class MainController extends \Model\User
             if ( isset($_POST['login']) ) :
                 $login = new \Core\Login;
                 $status = $login->login();
-                if (!$status) $this->util->redirect( '/login' );
+                if (!$status) :
+                    $maybe_redirect = filter_var( $_GET['redirect'], FILTER_SANITIZE_URL );
+                    $url = (!empty($maybe_redirect) && $maybe_redirect != '')? $maybe_redirect : '/login';
+                    $this->util->redirect( $url );
+                endif;
             endif;
         });
         
