@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** App public url */
 define('APP_URL', filter_var( $_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL ) );
+define('APP_URL_WITH_PROTOCOL', 'http://'.APP_URL );
 
 /** Define global date and time formats */
 define( 'DATE_FORMAT', 'd-m-Y' );
