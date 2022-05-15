@@ -171,10 +171,10 @@ function isValid($date, $format = DATETIME_FORMAT){
     
     $user = $instance->get_user( $application['user_id'] );
 
-    $approve_href = "/approve/{$appl_id}";
+    $approve_href = APP_URL_WITH_PROTOCOL."/approve/{$appl_id}";
     $approve_link = '<a href="'. $approve_href .'" >Approve</a>' ;
     
-    $reject_href = "/reject/{$appl_id}";
+    $reject_href = APP_URL_WITH_PROTOCOL."/reject/{$appl_id}";
     $reject_link = '<a href="'. $reject_href .'" >Reject</a>' ;
     
     foreach ( $admin_emails as $email ) :
