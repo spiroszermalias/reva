@@ -9,8 +9,7 @@ that will automatically be sent to you after the user's submission. The user wil
 ## Installation
 Installation is really easy with ReVa and you're only required to perform the least amount of steps possible 🙃.
 You should be good to go in a few minutes following these steps:
-1. Clone the repo: `git clone https://{username}:{password}@github.com/spiroszermalias/reva.git`.
-Replace {username} and {password} with your credentials.
+1. Clone the repo to your desired working directory.
 
 2. Create an empty MySQL or MariaDB database and a user with full privileges on the database.
 Place the credentials in prod-config.php and/or dev-config.php under the config dir*.
@@ -21,6 +20,9 @@ ReVa will populate the database automatically.
 4. After you make sure that you have set `/public` dir as your webserver's document root,
 visit `example.com/setup` (if your domain would be example.com). This will allow you to
 add the first admin user. Voila!
+
+You might also want to set some of the options found in config/config.php - for example the Timezone or even
+the "from" email address (GLOBAL_MAIL_FROM constant).
 
 *These two files are identical and are meant to be used in case you need to seperate
 development from production-specific configuration constants. The config that gets loaded
@@ -33,13 +35,15 @@ is controlled by the master config.php located in the same dir, by setting `APP_
 * User authentication
 * User edit and roles
 * Quick approve/reject
+* Responsive design
 ###### Technical features
 * PSR-4 class autoloading
 * Multiple alias functions to easily access class methods'
 * bramus/router for routing
 * MeekroDB for easy and secure DB transactions
 * User persistent sessions
-* Strong authentication hashing
+* Strong authentication hashing using bcrypt
+* Strong password validation
 
 ## Basic usage
 Usage is pretty simple. Below, usage is referenced based on the two distinct user roles:
@@ -53,12 +57,12 @@ You are also able to submit vacation requests yourself but whether or not this m
 
 ###### Employees
 As an 'employee' user:
-* Submit requests for vacation time, stating the reason and date-range.
+* Submit requests for vacation time, stating the reason and date-range (end date ir forced to be larger than the start one).
 * Watch your request history, info and state
 
 ## Mumbo jumbo
 For the more tech savvy out there, you may be instrested in the following technical notes to keep in mind
-in case you need to extend or tweak the codebase.
+in case you need to extend or tweak the codebase. For more, access the documentation [here](https://www.spiroszermalias.com/reva_docs/).
 
 ###### Project structure
 Most of the code that you may need to deal with is in the /App directory. Directory tree:
@@ -73,4 +77,8 @@ Most of the code that you may need to deal with is in the /App directory. Direct
 ```
 
 ###### Security and user sessions
-Loging in by default sets the session lifetime to a month.
+Loging in by default sets the session lifetime to a month. Wherever hashing is performed, bcrypt algorithm is explicitly used.
+Each logged in user gets attached to these cookies:
+* `random_password` and `random_selector` which are random hashed values. They do NOT relate by any means to the user's original or hashed password.
+* `user_login` which contains the login identifier (the email in our case)
+* The default php session cookie `PHPSESSID`
