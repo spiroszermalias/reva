@@ -1,7 +1,7 @@
 # ReVa
 ReVa (Request Vacation) is the go-to project to manage employee requests for vacations!
 
-## How ReVa will help you
+## How ReVa may help you
 ReVa streamlines the vacation request and approval proccess through simplicity and automation.
 It exposes a dashboard for the users to submit their requests and you only have to click on the "approve" or "reject" link
 that will automatically be sent to you after the user's submission. The user will be notified immediately of your decision.
@@ -29,7 +29,7 @@ is controlled by the master config.php located in the same dir, by setting `APP_
 ## Features
 ###### Application user
 * Email notifications
-* Request history and state
+* Request history, state and other info
 * User authentication
 * User edit and roles
 * Quick approve/reject
@@ -38,8 +38,37 @@ is controlled by the master config.php located in the same dir, by setting `APP_
 * Multiple alias functions to easily access class methods'
 * bramus/router for routing
 * MeekroDB for easy and secure DB transactions
+* User persistent sessions
+* Strong authentication hashing
 
 ## Basic usage
-Usage is pretty simple. Following below, reference is made based on the two distinct user roles.
+Usage is pretty simple. Below, usage is referenced based on the two distinct user roles:
+
 ###### Admins
+As an 'admin' user you may perform these actions:
+* Register new users.
+* Edit existing users.
+* Approve or reject vacation requests.
+You are also able to submit vacation requests yourself but whether or not this makes sense, depends on you/organization and your workflow.
+
 ###### Employees
+As an 'employee' user:
+* Submit requests for vacation time, stating the reason and date-range.
+* Watch your request history, info and state
+
+## Mumbo jumbo
+For the more tech savvy out there, you may be instrested in the following technical notes to keep in mind
+in case you need to extend or tweak the codebase.
+
+###### Project structure
+Most of the code that you may need to deal with is in the /App directory. Directory tree:
+├───App
+│   ├───Controller
+│   ├───core
+│   ├───functions
+│   ├───Model
+│   └───views
+│       └───global
+
+###### Security and user sessions
+Loging in by default sets the session lifetime to a month.
