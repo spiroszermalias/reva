@@ -13,7 +13,14 @@ You should be good to go in a few minutes following these steps:
 Replace {username} and {password} with your credentials.
 
 2. Create an empty MySQL or MariaDB and a user with full privileges on the database.
-Place the credentials in prod-config.php and/or dev-config.php under the config dir.
-These two files are identical and are meant to be used in case you need to seperate
-developement and production specific configuration constants. The config that gets loaded
+Place the credentials in prod-config.php and/or dev-config.php under the config dir*.
+
+3. Run `composer update` to install dependencies.
+
+4. After you make sure that you have set `/public` dir as your webserver's document root,
+visit (if for your domain would be example.com) `example.com/setup`. This will allow you to first
+add the first admin user. Voila!
+
+*These two files are identical and are meant to be used in case you need to seperate
+development from production specific configuration constants. The config that gets loaded
 is controlled by the master config.php located in the same dir, by setting `APP_MODE`.
