@@ -7,7 +7,7 @@ It exposes a dashboard for the users to submit their requests and you only have 
 that will automatically be sent to you after the user's submission. The user will be notified immediately of your decision.
 
 ## Installation
-You can access the technical documentation [here](https://www.spiroszermalias.com/reva_docs/). Installation is really easy with ReVa and you're only required to perform the least amount of steps possible 🙃.
+You can access the technical documentation [here](https://www.spiroszermalias.com/reva_docs/). Installation is really easy with ReVa and you're only required to perform the least number of steps possible 🙃.
 You should be good to go in a few minutes following these steps:
 1. Clone the repo to your desired working directory.
 
