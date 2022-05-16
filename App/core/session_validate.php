@@ -1,23 +1,47 @@
 <?php
+/**
+ * \Core\Session_Validate contains the user session validation methods as well as the login state
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @package App
+ * @subpackage Core
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
 namespace Core;
 
 class Session_Validate extends Auth
 {
+
     public function __contruct() {
         $this->checkSession();
     }
 
+    /**
+     * checkSession() initiates a series of checks to determine the session status
+     *
+     * @return void
+     */
     private function checkSession() {
         $logged_in = $this->logged_in();
     }
     
+    /**
+     * Get the current user login status
+     *
+     * @return boolean True if user is logged in, false if not.
+     */
     public function logged_in() {
         $login_state = false;
         $login_state = $this->is_cookie_session_valid();
         return $login_state;
     }
 
+    /**
+     * Determine if the user session is valid or expired
+     *
+     * @return boolean True if session is valid and not expired, false otherwise.
+     */
     private function is_cookie_session_valid() {
         $login_state = false;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Core\Db class performs checks and performs actions relating to the database entity structure.
+ * Core\Db class performs checks and performs actions relating to the database entity structure
  * 
  * @link https://github.com/spiroszermalias/reva
  * @package reva

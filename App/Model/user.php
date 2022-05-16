@@ -1,14 +1,29 @@
 <?php
+/**
+ * The user model
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @package App
+ * @subpackage Model
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
 namespace Model;
 
 class User
 {
+    /** @var array $allowed_roles An array of the allowed user roles on the site */
     private $allowed_roles = array(
         'admin',
         'employee'
     );
 
+    /**
+     * Get a list of all the users
+     *
+     * @param integer $current_page_number Specify the current display page number (used for pagination).
+     * @return array An array of all users.
+     */
     protected function list_users( $current_page_number = 1 ) {
         $data = array();
         $table = USERS_TBL;
@@ -66,6 +81,11 @@ class User
         return false;
     }
 
+    /**
+     * Creates a new user
+     *
+     * @return void
+     */
     protected function create_user() {
         $first_name = filter_input(INPUT_POST, 'firstname-input', FILTER_SANITIZE_STRING);
         $last_name = filter_input(INPUT_POST, 'lastname-input', FILTER_SANITIZE_STRING);
@@ -123,6 +143,11 @@ class User
         return ($status == 1)? true : false;
     }
 
+    /**
+     * Get a list with all the admins' emails
+     *
+     * @return array An array with all the admin users emails
+     */
     public function get_admin_emails() {
         $table = USERS_TBL;
         $query = "SELECT user_email FROM {$table} WHERE `role` = 'admin'";
@@ -130,6 +155,11 @@ class User
         return $admin_emails;
     }
 
+    /**
+     * Gets the current user id
+     *
+     * @return mixed The user id - false on error
+     */
     public function get_user_id() {
         $user_email = filter_var($_COOKIE['user_login'], FILTER_VALIDATE_EMAIL);
         if (!$user_email) return false;
@@ -139,6 +169,12 @@ class User
         return ( is_int($user_id) )? $user_id : false ;
     }
 
+    /**
+     * Gets an array of user info
+     *
+     * @param int $user_id The user id to get info for.
+     * @return array The user information.
+     */
     public function get_user( $user_id ) {
         $table = USERS_TBL;
         $query = "SELECT * FROM {$table} WHERE `user_id` = '{$user_id}'";
@@ -146,6 +182,11 @@ class User
         return $user;
     }
 
+    /**
+     * Validates and updates a user's registered information
+     *
+     * @return mixed String with the error message if validation fails, false if the DB call failed or true if validation and database call were successful.
+     */
     protected function update_user() {
         $user_id = filter_input(INPUT_GET, 'user', FILTER_VALIDATE_INT);
         if ( !$user_id ) return 'Please provide a valid user id';

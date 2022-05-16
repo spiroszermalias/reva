@@ -1,5 +1,17 @@
 <?php
+/**
+ * A series of functions to with a global scope of use
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
+/**
+ * Get the time now in the timezone that is set in the project's config
+ *
+ * @param string $format Either 'datetime' or 'timestamp'. Datetime returns the datetime in format as specified in config. Default: 'datetime'
+ * @return string Datetime string or unix time
+ */
 function now( $format = 'datetime' ) {
     $time = new stdClass();
     $datetime = '';
@@ -61,11 +73,21 @@ function now( $format = 'datetime' ) {
     return ($format === 'timestamp')? $timestamp : $datetime;
 }
 
+/**
+ * An alias for Core\Session_Validate::logged_in()
+ *
+ * @return boolean True if user is logged in, false otherwise
+ */
 function logged_in() {
     $instance = new Core\Session_Validate;
     return $instance->logged_in();
 }
 
+/**
+ * Checks whether or not the user is an admin or not
+ *
+ * @return boolean True if user is logged in and an admin, false in any other case.
+ */
 function is_admin() {
     $is_admin = false;
     if ( logged_in() ) :
@@ -75,10 +97,18 @@ function is_admin() {
     endif;
     $ins = new \Model\User;
     $fresh_install = $ins->check_init_setup();
+    //If we're in the initial instalation/setup of the project, grant admin privileges anyway
     if ( $fresh_install ) return true;
     return $is_admin;
 }
 
+/**
+ * Renders a template under the view directory
+ *
+ * @param string $template the template name without the file extension.
+ * @param array $vars An optional array of passed variables to the template. Array keys will become available as variable names in the template.
+ * @return void
+ */
 function render( string $template = '', $vars = [] ) {
     if ( $template == '' ) return '';
     
@@ -99,14 +129,29 @@ function render( string $template = '', $vars = [] ) {
     exit;
 }
 
+/**
+ * Includes the global site header
+ *
+ * @return void
+ */
 function head() {
     include dirname(__DIR__, 1) . "/views/global/head.php";
 }
 
+/**
+ * Includes the global site footer
+ *
+ * @return void
+ */
 function footer() {
     include dirname(__DIR__, 1) . "/views/global/footer.php";
 }
 
+/**
+ * Retrieves the current user information
+ *
+ * @return array Empty array if error or the user is not found, the user info otherwise.
+ */
 function get_user_info() {
     $user_model_ins = new \Model\User;
     $current_user_id = $user_model_ins->get_user_id();
@@ -114,6 +159,13 @@ function get_user_info() {
     return ( !empty($user_info) )? $user_info : array();
 }
 
+/**
+ * Validates whether or not a provided datetime string matches with a given datetime format
+ *
+ * @param string $date The datetime to validate.
+ * @param string $format The format to validate against. Default: DATETIME_FORMAT
+ * @return boolean True if providded date matches the specified format. False if it does not.
+ */
 function isValid($date, $format = DATETIME_FORMAT){
 	$dt = DateTime::createFromFormat($format, $date);
 	return $dt && $dt->format($format) === $date;
@@ -157,6 +209,12 @@ function isValid($date, $format = DATETIME_FORMAT){
     </div>
  <?php }
 
+/**
+ * Notifies admin(s) user(s) through email, about the receival of a new vacation request and exposes the approval/reject links to them
+ *
+ * @param int $appl_id The application id
+ * @return void
+ */
  function email_request_to_admins($appl_id) {
     //Since there may be multiple admins, get all admin emails
     $user_model_ins = new \Model\User;
@@ -196,6 +254,14 @@ function isValid($date, $format = DATETIME_FORMAT){
     endforeach;
  }
 
+ /**
+  * Sends an email to the appropriate user with the change of status of a vacation request
+  *
+  * @param string $approval_status The status of the request
+  * @param string $submision_date The date on which the request was submitted
+  * @param string $user_email The user email to which the notification should be sent to
+  * @return void
+  */
  function notify_user($approval_status, $submision_date, $user_email) {
     $appr_status = ($approval_status)? 'approved' : 'rejected' ;
     $to = $user_email;

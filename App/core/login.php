@@ -1,11 +1,25 @@
 <?php
+/**
+ * \Core\Login takes control of the login action
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @package App
+ * @subpackage Core
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
 namespace Core;
 
 class Login
 {
+    /** @var Auth $auth Holds an intance of the Auth class */
     private $auth = NULL;
 
+    /**
+     * Attempts to log the user in
+     *
+     * @return void
+     */
     public function login() {
 
         $this->auth = new Auth;
@@ -29,6 +43,11 @@ class Login
         endif;
     }
 
+    /**
+     * Checks whether or not the user should be allowed access with the credentials they provided.
+     *
+     * @return boolean True if the user is authenticated, false otherwise.
+     */
     private function is_authenticated() {
         $isAuthenticated = false;
         $user_email = isset( $_POST['user_email'] )? $_POST['user_email'] : '';

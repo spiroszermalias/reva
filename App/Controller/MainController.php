@@ -1,25 +1,45 @@
 <?php
+/**
+ * The main application controller class
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @package App
+ * @subpackage controller
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
 namespace controller;
 
 use \Bramus\Router\Router;
+use \Core\Util;
+use \Model\Application;
 
 class MainController extends \Model\User
 {
+    /** @var \Bramus\Router\Router $router Holds an intance of the Router class */
     private $router = NULL;
+    /** @var \Core\Util $util Holds an intance of the Util class */
     private $util = NULL;
+    /** @var \Model\Application $appl Holds an intance of the Application class */
     private $appl = NULL;
 
     public function __construct() {
         new \Core\Db;
         $this->router = new Router();
-        $this->util = new \Core\Util();
-        $this->appl = new \Model\Application;
+        $this->util = new Util();
+        $this->appl = new Application;
+        //Define and run the routers
         $this->routes();
         $this->router->run();
     }
 
+    /**
+     * Define the controller's routes
+     *
+     * @return void
+     */
     private function routes() {
+        //This hook runs before any other router.
         $this->router->before('GET|POST', '/[^\/login].*', function() {
             $request_uri = filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL );
             $full_url = APP_URL_WITH_PROTOCOL.$request_uri;
@@ -28,6 +48,7 @@ class MainController extends \Model\User
             endif;
         });
 
+        // /setup is used to render the "first user" creation page durng installation
         $this->router->get( '/setup', function() {
             $fresh_install = $this->check_init_setup();
             if ( $fresh_install ) :
@@ -67,8 +88,8 @@ class MainController extends \Model\User
             endif;
         });
 
-        $this->router->get( '/login', function() {
-            
+        //The login page
+        $this->router->get( '/login', function() {            
             if ( logged_in() ) :
                 if ( !is_admin() ) : 
                     $this->util->redirect( '/dashboard' );
@@ -99,6 +120,7 @@ class MainController extends \Model\User
             endif;
         });
         
+        //The user list display
         $this->router->get('/users', function() {
             $user_ins = new \Model\User;
             if ( !is_admin() ) : 
@@ -117,7 +139,7 @@ class MainController extends \Model\User
                 render('edit-user', $data);
             endif;
 
-            //Default
+            //Default $page_number = 1
             $page_number = 1;
             if ( isset($_GET['page_number']) ) :
                 $page_number_param = (int) trim( $_GET['page_number'] );

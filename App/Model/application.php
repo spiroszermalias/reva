@@ -1,9 +1,22 @@
 <?php
+/**
+ * The applications model
+ * 
+ * @link https://github.com/spiroszermalias/reva
+ * @package App
+ * @subpackage Model
+ * @author Spiros Zermalias <me@spiroszermalias.com>
+ */
 
 namespace Model;
 
 class Application extends \Model\User
 {
+    /**
+     * Retrieves all the current user's applications
+     *
+     * @return array An array of the applications data.
+     */
     public function get_applications() {
         $current_user_id = $this->get_user_id();
         if (!$current_user_id) return array();
@@ -53,6 +66,11 @@ class Application extends \Model\User
         return $data;
     }
 
+    /**
+     * Validates newle requested applications for vacation
+     *
+     * @return int The new application unique id
+     */
     public function submit_application() {
         if ( 
             !isset($_POST['reason'])  ||
@@ -91,6 +109,12 @@ class Application extends \Model\User
         return $new_appl_id;
     }
 
+    /**
+     * Gets info for a single application
+     *
+     * @param int $appl_id The application id
+     * @return array An array with the application info. NUll if not found.
+     */
     public function get_application($appl_id) {
         $table = APPL_TBL;
         $query = "SELECT * FROM {$table} WHERE `id` = %i";
@@ -98,6 +122,14 @@ class Application extends \Model\User
         return $application;
     }
 
+    /**
+     * Inserts a new application to the database
+     *
+     * @param string $reason The reason for which the user states he needs to take time off.
+     * @param string $start The requested start date.
+     * @param string $end The requested end date.
+     * @return mixed The new application id. False if error.
+     */
     protected function insert_application($reason, $start, $end) {
         $user = get_user_info();
         $user_id = $user['user_id'];
@@ -114,6 +146,12 @@ class Application extends \Model\User
         return ($result != 0)? $new_appl_id : false;
     }
 
+    /**
+     * Change an request status to approved
+     *
+     * @param int $appl_id The application id
+     * @return void
+     */
     public function approve($appl_id) {
         \DB::update(APPL_TBL, array(
             'status' => 'approved'
@@ -126,6 +164,12 @@ class Application extends \Model\User
         notify_user(true, $submision_date, $user_email);
     }
 
+    /**
+     * * Change an request status to rejected
+     *
+     * @param int $appl_id The application id
+     * @return void
+     */
     public function reject($appl_id) {
         \DB::update(APPL_TBL, array(
             'status' => 'rejected'
