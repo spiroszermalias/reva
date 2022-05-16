@@ -57,7 +57,7 @@ You are also able to submit vacation requests yourself but whether or not this m
 
 ###### Employees
 As an 'employee' user:
-* Submit requests for vacation time, stating the reason and date-range (end date ir forced to be larger than the start one).
+* Submit requests for vacation time, stating the reason and date-range (end date is forced to be larger than the start one).
 * Watch your request history, info and state
 
 ## Mumbo jumbo
